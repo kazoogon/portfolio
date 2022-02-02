@@ -18,16 +18,19 @@ export const Index: NextPage = () => {
 
   return (
     <Worldmap ref={appRef}>
-      <div ref={canvasRef}></div>
+      <Canvas ref={canvasRef} />
     </Worldmap>
   )
 }
 
 const Worldmap = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
+`
+const Canvas = styled.div`
+  position: absolute;
   background-image: radial-gradient(#182b34, #2d1d34);
 `
 
