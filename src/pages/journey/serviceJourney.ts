@@ -32,10 +32,10 @@ export default class ServiceJourney {
   private currentPicImg: HTMLImageElement[] = []
 
   //class name
-  private PIC_VISIBLE_CLASS = 'pic-visible'
-  private DESC_VISIBLE_CLASS = 'desc-visible'
-  private FLAG_VISIBLE_CLASS = 'flag-visible'
-  private NAME_VISIBLE_CLASS = 'name-visible'
+  private readonly PIC_VISIBLE_CLASS = 'pic-visible'
+  private readonly DESC_VISIBLE_CLASS = 'desc-visible'
+  private readonly FLAG_VISIBLE_CLASS = 'flag-visible'
+  private readonly NAME_VISIBLE_CLASS = 'name-visible'
 
   //anime.js
   private animeShowDesc: AnimeInstance[] = []
@@ -108,7 +108,6 @@ export default class ServiceJourney {
       CONST.EVENT.TOUCH_START,
       this.handleMouseMove,
     ) //for smartphone
-
     this.scene.add(this.stars)
     this.scene.add(this.earth)
   }
