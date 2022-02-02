@@ -12,7 +12,7 @@ export const COLOR = {
   WHITE: 0xffffff,
 
   //universe
-  UNIVERSE_STAR: 0x5f77a2,
+  UNIVERSE_STAR: 0xffffff,
   UNIVERSE_POINT: 0xfe700b,
 }
 
