@@ -8,14 +8,15 @@
 export const getInitializedMousePosByMouseEvent = (
   e: MouseEvent | TouchEvent,
 ): { x: number; y: number } => {
-  const element: EventTarget = e.currentTarget
-  let event = e
-  let x: number
-  let y: number
+  const element: HTMLDivElement = <HTMLDivElement>e.currentTarget
+  let event: MouseEvent | TouchEvent = e
+  let x!: number
+  let y!: number
 
-  if (e.nativeEvent) {
-    event = e.nativeEvent
-  }
+  // TODO: is it necessary code ???
+  // if (e.nativeEvent) {
+  //   event = e.nativeEvent
+  // }
 
   // 要素上のXY座標
   if (event instanceof TouchEvent) {
@@ -43,7 +44,7 @@ export const getInitializedMousePosByMouseEvent = (
  * @param {Element} el
  */
 export const removeElementItself = (el: Element): void => {
-  el.parentNode.removeChild(el)
+  el.parentNode?.removeChild(el)
 }
 
 /**
@@ -51,10 +52,10 @@ export const removeElementItself = (el: Element): void => {
  * @param {HTMLElement} ref
  * @returns {[]}
  */
-export const getSvgPaths = (ref: HTMLElement): number[] => {
-  const paths = Array.from(ref.current.querySelectorAll('path'))
-  return paths
-}
+// TODO : check is it necessary code or not
+// export const getSvgPaths = (ref: HTMLElement): number[] => {
+//   return Array.from(ref.current.querySelectorAll('path'))
+// }
 
 /**
  * get random number
@@ -62,6 +63,6 @@ export const getSvgPaths = (ref: HTMLElement): number[] => {
  * @param max
  * @returns {number}
  */
-export const getRandomInt = (min, max): number => {
+export const getRandomInt = (min: number, max: number): number => {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }

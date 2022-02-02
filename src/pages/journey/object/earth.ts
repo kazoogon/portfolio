@@ -1,25 +1,16 @@
 import * as THREE from 'three'
 import { Vector3 } from 'three'
-import { Country } from './country'
 import * as CONST from '../const'
+import { countryInfos, CountryInfoType } from './country'
 
 export default class Earth extends THREE.Group {
   public world: THREE.Mesh
-  public countryPoints: number[] = []
+  public countryPoints: THREE.Group[] = []
 
   constructor() {
     super()
-    this.createEarth()
-    this.createCountryPoints()
-  }
-
-  public update = (): void => {
-    this.world.rotation.y += 0.002
-  }
-
-  private createEarth = (): void => {
-    const geometry = new THREE.SphereGeometry(100, 60, 60)
     const loader = new THREE.TextureLoader()
+    const geometry = new THREE.SphereGeometry(100, 60, 60)
     const material = new THREE.MeshPhongMaterial({
       map: loader.load(`${CONST.PATH.IMG_JOURNEY}world-map-dot-white.png`),
       bumpScale: 1.0,
@@ -28,15 +19,18 @@ export default class Earth extends THREE.Group {
     })
     this.world = new THREE.Mesh(geometry, material)
     this.world.receiveShadow = true
+    this.createCountryPoints()
+  }
+
+  public update = (): void => {
+    this.world.rotation.y += 0.002
   }
 
   /**
    * create place point objects
    */
   private createCountryPoints(): void {
-    const country = new Country()
-
-    country.countryInfos.forEach((country) => {
+    countryInfos.forEach((country: CountryInfoType) => {
       const latitude = country.latlng[0]
       const longitude = country.latlng[1]
       const point = new THREE.Group()

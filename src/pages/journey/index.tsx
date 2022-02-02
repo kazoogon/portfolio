@@ -7,13 +7,7 @@ export const Index: NextPage = () => {
   const appRef = createRef<HTMLDivElement>()
   const canvasRef = createRef<HTMLDivElement>()
   useEffect(() => {
-    const service = new ServiceJourney(appRef, canvasRef)
-    // TODO: ここ全部service内でいいな***********************
-    service.createGeometry()
-    service.createRenderer()
-    service.trackControll()
-    service.setResizeEvent()
-    service.animate()
+    new ServiceJourney(appRef, canvasRef)
   }, [])
 
   return (

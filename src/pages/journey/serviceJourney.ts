@@ -2,20 +2,20 @@ import * as THREE from 'three'
 import React from 'react'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { Intersection } from 'three/src/core/Raycaster'
-import anime from 'animejs'
+import anime, { AnimeInstance } from 'animejs'
 import debounce from 'lodash.debounce'
 
 //from this app
 import Earth from './object/earth'
 import Stars from './object/stars'
-import { Country } from './object/country'
+import { CountryInfoType, getCountryInfoByName } from './object/country'
 import * as CONST from './const'
 import * as Common from './common'
 
 export default class ServiceJourney {
   //three.js parts
-  private scene
-  private camera
+  private scene: THREE.Scene
+  private camera: THREE.PerspectiveCamera
   private earth: Earth
   private stars: Stars
   private renderer: THREE.WebGLRenderer
@@ -26,25 +26,25 @@ export default class ServiceJourney {
   private canvasRef: React.RefObject<HTMLDivElement>
 
   //selected country elements
-  private currentDescDiv = {} //{HTMLDivElement, HTMLDivElement, ...}
-  private currentNameDiv = {} //{HTMLDivElement, HTMLDivElement, ...}
-  private currentFlagImg = {} //{HTMLImageElement, HTMLImageElement, ...}
-  private currentPicImg = {} //{HTMLImageElement, HTMLImageElement, ...}
+  private currentDescDiv: HTMLDivElement[] = []
+  private currentNameDiv: HTMLDivElement[] = []
+  private currentFlagImg: HTMLImageElement[] = []
+  private currentPicImg: HTMLImageElement[] = []
 
   //class name
-  private _picVisible = 'pic-visible'
-  private _descVisible = 'desc-visible'
-  private _flagVisible = 'flag-visible'
-  private _nameVisible = 'name-visible'
+  private PIC_VISIBLE_CLASS = 'pic-visible'
+  private DESC_VISIBLE_CLASS = 'desc-visible'
+  private FLAG_VISIBLE_CLASS = 'flag-visible'
+  private NAME_VISIBLE_CLASS = 'name-visible'
 
   //anime.js
-  private animeShowDesc = [] //[anime, anime, ...]
-  private animeShowName = [] //[anime, anime, ...]
-  private animeShowPic = [] //[anime, anime, ...]
-  private animeShowFlag = [] //[anime, anime, ...]
+  private animeShowDesc: AnimeInstance[] = []
+  private animeShowName: AnimeInstance[] = []
+  private animeShowPic: AnimeInstance[] = []
+  private animeShowFlag: AnimeInstance[] = []
 
-  private HEIGHT: number | undefined
-  private WIDTH: number | undefined
+  private HEIGHT!: number
+  private WIDTH!: number
 
   /**
    * earth is moving or not
@@ -70,24 +70,34 @@ export default class ServiceJourney {
   ) {
     this.appRef = appRef
     this.canvasRef = canvasRef
+    this.WIDTH = window.innerWidth
+    this.HEIGHT = window.innerHeight
 
-    // scene
     this.scene = new THREE.Scene()
-
-    // camera
     this.camera = new THREE.PerspectiveCamera(
       75,
-      window.innerWidth / window.innerHeight,
+      this.WIDTH / this.HEIGHT,
       0.1,
       1000,
     )
+    this.earth = new Earth()
+    this.renderer = new THREE.WebGLRenderer({ alpha: true }) //alpha = transparent
+    this.controller = new OrbitControls(this.camera, this.renderer.domElement)
+    this.stars = new Stars()
+    this.createLight()
+    this.createGeometry()
+    this.createRenderer()
+    this.trackControll()
+    this.setResizeEvent()
+    this.animate()
+  }
 
-    // light
+  private createLight(): void {
     const ambientLight = new THREE.AmbientLight(CONST.COLOR.AMBIENT_LIGHT)
     this.scene.add(ambientLight)
   }
 
-  public createGeometry(): void {
+  private createGeometry(): void {
     this.setCamPosByCountryIndex(0) //set default cam position
 
     this.canvasRef.current!.addEventListener(
@@ -99,7 +109,6 @@ export default class ServiceJourney {
       this.handleMouseMove,
     ) //for smartphone
 
-    this.stars = new Stars()
     this.scene.add(this.stars)
     this.scene.add(this.earth)
   }
@@ -109,8 +118,6 @@ export default class ServiceJourney {
    * @param {number} countryIndex
    */
   private setCamPosByCountryIndex(countryIndex: number): void {
-    this.earth = new Earth()
-
     const center = new THREE.Vector3() //center position (地核)
     const city = this.earth.countryPoints[countryIndex].position
 
@@ -130,16 +137,14 @@ export default class ServiceJourney {
     this.camera.position.copy(camPos)
   }
 
-  public createRenderer(): void {
-    this.renderer = new THREE.WebGLRenderer({ alpha: true }) //alpha = transparent
-    this.renderer.setSize(window.innerWidth, window.innerHeight)
+  private createRenderer(): void {
+    this.renderer.setSize(this.WIDTH, this.HEIGHT)
     this.renderer.setPixelRatio(window.devicePixelRatio)
     this.renderer.shadowMap.enabled = true
     this.canvasRef.current!.appendChild(this.renderer.domElement)
   }
 
-  public trackControll(): void {
-    this.controller = new OrbitControls(this.camera, this.renderer.domElement)
+  private trackControll(): void {
     this.controller.minDistance = 170
     this.controller.maxDistance = 200
     this.controller.maxPolarAngle = Math.PI / 1.5
@@ -153,10 +158,7 @@ export default class ServiceJourney {
     this.controller.rotateSpeed = 0.17
   }
 
-  public setResizeEvent(): void {
-    this.HEIGHT = window.innerHeight
-    this.WIDTH = window.innerWidth
-
+  private setResizeEvent(): void {
     window.addEventListener(
       CONST.EVENT.RESIZE,
       debounce(() => {
@@ -169,7 +171,7 @@ export default class ServiceJourney {
     )
   }
 
-  public animate(): void {
+  private animate(): void {
     requestAnimationFrame(() => {
       this.animate()
     })
@@ -259,9 +261,7 @@ export default class ServiceJourney {
     screenY: number,
     screenX: number,
   ): void => {
-    const contry = new Country()
-    const countryInfo = contry.getCountryInfoByName(cityName)
-
+    const countryInfo = getCountryInfoByName(cityName)
     this.showPic(countryInfo, screenY, screenX)
     this.showFlag(countryInfo, screenY, screenX)
     this.showName(countryInfo, screenY, screenX)
@@ -269,14 +269,14 @@ export default class ServiceJourney {
   }
 
   private showPic = (
-    countryInfo: Country,
+    countryInfo: CountryInfoType,
     screenY: number,
     screenX: number,
   ): void => {
     const picImg = (this.currentPicImg[countryInfo.index] =
       document.createElement('img'))
 
-    picImg.classList.add(this._picVisible + countryInfo.index)
+    picImg.classList.add(this.PIC_VISIBLE_CLASS + countryInfo.index)
     picImg.src = `${CONST.PATH.IMG_JOURNEY_COUNTRY}${countryInfo.name}.png`
     picImg.height = 150
     picImg.width = 150
@@ -286,7 +286,7 @@ export default class ServiceJourney {
     this.appRef.current!.appendChild(picImg)
 
     this.animeShowPic[countryInfo.index] = anime({
-      targets: `.${this._picVisible}${countryInfo.index}`,
+      targets: `.${this.PIC_VISIBLE_CLASS}${countryInfo.index}`,
       scale: [0, 1],
       duration: 900,
       easing: CONST.EASE.OUT_ELASTIC,
@@ -304,11 +304,15 @@ export default class ServiceJourney {
     })
   }
 
-  private showFlag = (countryInfo, screenY: number, screenX: number): void => {
+  private showFlag = (
+    countryInfo: CountryInfoType,
+    screenY: number,
+    screenX: number,
+  ): void => {
     const flagImg = (this.currentFlagImg[countryInfo.index] =
       document.createElement('img'))
 
-    flagImg.classList.add(this._flagVisible + countryInfo.index)
+    flagImg.classList.add(this.FLAG_VISIBLE_CLASS + countryInfo.index)
     flagImg.src = `${CONST.PATH.IMG_JOURNEY_FLAG}${countryInfo.name}.svg`
     flagImg.height = 30
     flagImg.width = 30
@@ -322,7 +326,7 @@ export default class ServiceJourney {
     this.appRef.current!.appendChild(flagImg)
 
     this.animeShowFlag[countryInfo.index] = anime({
-      targets: `.${this._flagVisible}${countryInfo.index}`,
+      targets: `.${this.FLAG_VISIBLE_CLASS}${countryInfo.index}`,
       delay: 100,
       scale: [0, 1],
       rotate: [15, -5],
@@ -331,11 +335,15 @@ export default class ServiceJourney {
     })
   }
 
-  private showName = (countryInfo, screenY: number, screenX: number): void => {
+  private showName = (
+    countryInfo: CountryInfoType,
+    screenY: number,
+    screenX: number,
+  ): void => {
     const nameDiv = (this.currentNameDiv[countryInfo.index] =
       document.createElement('div'))
 
-    nameDiv.classList.add(this._nameVisible + countryInfo.index)
+    nameDiv.classList.add(this.NAME_VISIBLE_CLASS + countryInfo.index)
     nameDiv.innerHTML = countryInfo.name.toUpperCase()
     nameDiv.style.position = 'absolute'
     nameDiv.style.top = `calc(${screenY}px - ${
@@ -347,7 +355,7 @@ export default class ServiceJourney {
     this.appRef.current!.appendChild(nameDiv)
 
     this.animeShowName[countryInfo.index] = anime({
-      targets: `.${this._nameVisible}${countryInfo.index}`,
+      targets: `.${this.NAME_VISIBLE_CLASS}${countryInfo.index}`,
       delay: 100,
       scale: [0, 1],
       duration: 900,
@@ -355,11 +363,15 @@ export default class ServiceJourney {
     })
   }
 
-  private showDesc = (countryInfo, screenY: number, screenX: number): void => {
+  private showDesc = (
+    countryInfo: CountryInfoType,
+    screenY: number,
+    screenX: number,
+  ): void => {
     const descDiv = (this.currentDescDiv[countryInfo.index] =
       document.createElement('div'))
 
-    descDiv.classList.add(this._descVisible + countryInfo.index)
+    descDiv.classList.add(this.DESC_VISIBLE_CLASS + countryInfo.index)
     descDiv.innerHTML = countryInfo.desc
     descDiv.style.position = 'absolute'
     this.appRef.current!.appendChild(descDiv)
@@ -371,7 +383,7 @@ export default class ServiceJourney {
     }px + 70px)`
 
     this.animeShowDesc[countryInfo.index] = anime({
-      targets: `.${this._descVisible}${countryInfo.index}`,
+      targets: `.${this.DESC_VISIBLE_CLASS}${countryInfo.index}`,
       delay: 300,
       scale: [0, 1],
       rotate: [15, -5],
@@ -380,7 +392,7 @@ export default class ServiceJourney {
     })
   }
 
-  private handleMouseLeaveInfo = (countryInfo): void => {
+  private handleMouseLeaveInfo = (countryInfo: CountryInfoType): void => {
     if (!this.isClosingCountryInfo) {
       this.isClosingCountryInfo = true
       this.isOnCountryPoint = false
@@ -399,9 +411,9 @@ export default class ServiceJourney {
     }
   }
 
-  private closePic = async (countryInfo): Promise<void> => {
+  private closePic = async (countryInfo: CountryInfoType): Promise<void> => {
     await anime({
-      targets: [`.${this._picVisible}${countryInfo.index}`],
+      targets: [`.${this.PIC_VISIBLE_CLASS}${countryInfo.index}`],
       scale: [1, 0],
       duration: 500,
       easing: CONST.EASE.IN_OUT_CUBIC,
@@ -416,9 +428,9 @@ export default class ServiceJourney {
     }).finished
   }
 
-  private closeName = async (countryInfo): Promise<void> => {
+  private closeName = async (countryInfo: CountryInfoType): Promise<void> => {
     await anime({
-      targets: [`.${this._nameVisible}${countryInfo.index}`],
+      targets: [`.${this.NAME_VISIBLE_CLASS}${countryInfo.index}`],
       scale: [1, 0],
       duration: 500,
       easing: CONST.EASE.IN_OUT_CUBIC,
@@ -431,9 +443,9 @@ export default class ServiceJourney {
     }).finished
   }
 
-  private closeFlag = async (countryInfo): Promise<void> => {
+  private closeFlag = async (countryInfo: CountryInfoType): Promise<void> => {
     await anime({
-      targets: [`.${this._flagVisible}${countryInfo.index}`],
+      targets: [`.${this.FLAG_VISIBLE_CLASS}${countryInfo.index}`],
       scale: [1, 0],
       duration: 500,
       easing: CONST.EASE.IN_OUT_CUBIC,
@@ -446,9 +458,9 @@ export default class ServiceJourney {
     }).finished
   }
 
-  private closeDesc = async (countryInfo): Promise<void> => {
+  private closeDesc = async (countryInfo: CountryInfoType): Promise<void> => {
     await anime({
-      targets: [`.${this._descVisible}${countryInfo.index}`],
+      targets: [`.${this.DESC_VISIBLE_CLASS}${countryInfo.index}`],
       scale: [1, 0],
       duration: 500,
       easing: CONST.EASE.IN_OUT_CUBIC,
