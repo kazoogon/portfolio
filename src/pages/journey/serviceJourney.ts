@@ -8,7 +8,7 @@ import debounce from 'lodash.debounce'
 //from this app
 import Earth from './object/earth'
 import Stars from './object/stars'
-import { CountryInfoType, getCountryInfoByName } from './object/country'
+import { CountryInfoType, getCountryInfoByName } from './data/country'
 import * as CONST from './const'
 import * as Common from './common'
 
@@ -64,7 +64,7 @@ export default class ServiceJourney {
    */
   private isClosingCountryInfo = false
 
-  public constructor(
+  constructor(
     appRef: React.RefObject<HTMLDivElement>,
     canvasRef: React.RefObject<HTMLDivElement>,
   ) {

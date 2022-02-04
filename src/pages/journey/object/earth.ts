@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { Vector3 } from 'three'
 import * as CONST from '../const'
-import { countryInfos, CountryInfoType } from './country'
+import { countryInfos, CountryInfoType } from '../data/country'
 
 export default class Earth extends THREE.Group {
   public world: THREE.Mesh
