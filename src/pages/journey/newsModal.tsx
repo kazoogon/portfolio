@@ -42,10 +42,15 @@ const FullScreen = styled.div<{ selectedNews: number | null }>`
   height: 100vh;
   width: 100vw;
   z-index: 1;
+  opacity: 1;
+  transition: 3s;
   ${({ selectedNews }) =>
     selectedNews === null &&
     css`
-      display: none;
+      height: 0;
+      width: 0;
+      opacity: 0;
+      transition: 3s;
     `}
 `
 const ModalWrapper = styled.div<{ selectedNews: number | null }>`
@@ -62,6 +67,23 @@ const ModalWrapper = styled.div<{ selectedNews: number | null }>`
   opacity: 0;
   font-weight: bold;
   transition: 0.7s opacity ease-out;
+  max-height: 500px;
+  overflow: scroll;
+
+  // TODO: these code need to move in other share file
+  ::-webkit-scrollbar {
+    width: 3px;
+    height: 0;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #182b34;
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #1f443b;
+  }
   ${({ selectedNews }) =>
     selectedNews !== null &&
     css`
@@ -79,9 +101,12 @@ const CountryName = styled.div`
 `
 const Title = styled.div`
   font-size: 3rem;
+  margin-bottom: 1rem;
 `
 const Desc = styled.div`
   font-size: 1.5rem;
+  // to recognize new line code in json "¥¥n" in React.js
+  white-space: pre-line;
 `
 
 export default NewsModal
