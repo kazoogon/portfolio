@@ -36,6 +36,7 @@ export const Index: NextPage = () => {
         </NewsWrapper>
         <NewsModal />
         <DarkFullScreen openNewsModal={selectedNews} />
+        <Message>Move cursor to mark</Message>
       </Worldmap>
     </selectedNewsContext.Provider>
   )
@@ -181,7 +182,9 @@ const NewsWrapper = styled.div`
   padding: 5px;
   max-width: 300px;
   height: 70%; // to use overflow: scroll:
-  //background: rgba(40, 33, 52, 0.2); //TODO : DRY with modal
+  @media screen and (max-width: 959px) {
+    display: none;
+  }
 `
 const DarkFullScreen = styled.div<{ openNewsModal: number | null }>`
   z-index: 0;
@@ -199,6 +202,15 @@ const DarkFullScreen = styled.div<{ openNewsModal: number | null }>`
       opacity: 1;
       transition: opacity 2s;
     `}  }
+`
+
+const Message = styled.div`
+  color: coral;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.4;
 `
 
 export default Index

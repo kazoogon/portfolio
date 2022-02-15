@@ -1,11 +1,11 @@
 import type { NextPage } from 'next'
-import Link from 'next/link'
+import Index from './journey'
 
 const Home: NextPage = () => {
   return (
     <>
-      Hello next.js
-      <Link href="/journey">journey</Link>
+      <Index />
+      {/*<Link href="/journey">journey</Link>*/}
     </>
   )
 }

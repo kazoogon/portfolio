@@ -19,7 +19,6 @@ const Application = ({ Component, pageProps }: AppProps) => {
 }
 
 const StyledTitle = styled.div`
-  cursor: pointer;
   width: 7rem;
   position: absolute;
   top: 2rem;
@@ -27,7 +26,6 @@ const StyledTitle = styled.div`
   z-index: 100;
   svg {
     path {
-      // TODO : colorどうしよ
       fill: azure;
     }
   }
