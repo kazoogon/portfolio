@@ -7,14 +7,14 @@ import { selectedNewsContext } from './index'
 
 export const NewsModal: NextPage = () => {
   const { selectedNews, setSelectedNews } = useContext(selectedNewsContext)
-  const closeModalOutsideNewsArea = (e: MouseEvent): void => {
+  const closeModalOutsideNewsArea = (e: any): void => {
     e.target === e.currentTarget && setSelectedNews(null)
   }
   return (
     <>
       <FullScreen
         selectedNews={selectedNews}
-        onClick={(e: MouseEvent) => closeModalOutsideNewsArea(e)}
+        onClick={(e) => closeModalOutsideNewsArea(e)}
       />
       <ModalWrapper selectedNews={selectedNews}>
         {selectedNews !== null && selectedNews !== undefined && (
