@@ -7,7 +7,7 @@ import {
   useRef,
   useState,
 } from 'react'
-import ServiceJourney from './serviceJourney'
+import ServiceJourney from '../../components/journey/serviceJourney'
 import styled, { css } from 'styled-components'
 import News from './news'
 import NewsModal from './newsModal'

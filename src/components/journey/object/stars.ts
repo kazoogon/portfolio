@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import * as CONST from '../../../components/journey/const'
+import * as CONST from '../const'
 
 export default class Stars extends THREE.Group {
   constructor() {
