@@ -13,13 +13,13 @@ export const newsData: Array<newsDataType> = [
   },
   {
     index: 1,
-    country: 'Bolivia',
+    country: 'bolivia',
     title: 'I got a cramp !!',
     desc: 'There is a beautiful biiiig lake in Bolivia, whose name is “Uyuni”. \nPeople can walk on this lake, because deepest of this lake is shallow. So I also walk with big smile like stupid little boy. But it turned out that I got cramp on my leg !!\n I know the reason because I had sandals(flip flops). When people walk with them, first toe and second toe need to put some muscle, right???  Yeah, this is the reason XD.  Dont give me a present sandals please.',
   },
   {
     index: 2,
-    country: 'Guatemala',
+    country: 'guatemala',
     title: 'Football master, Kaziu',
     desc: 'I had no experience of football at all, but I played football with children and adults in Guatemala. \n One day my friend who can speak Spanish well explained me \n\n That child said "this man with glasses (about me) dont know about football at ll, so dont pass the ball to him"\n\n Yeah, man nice to meet you, a fire was lit in me. I started to practice football with my friend who aim to professional football player in Guatemala everyday. \n Two months later, I played with these peoples in midfielder position. \n Now as IT engineer, this football skill is not useful at all  ',
   },
@@ -31,7 +31,7 @@ export const newsData: Array<newsDataType> = [
   },
   {
     index: 4,
-    country: 'Argentina',
+    country: 'argentina',
     title: 'I cant get on my airplane !!',
     desc: 'When I was in Argentina, I had a airplane ticket from Argentina to Spain. But I realized I could not get on airplane! \n That flight was through two cities in Brazil, it means I needed to enter Brazil once. \n Buuuuuuuut Japanese people need visa to enter Brazil. Later I wrote message to my friend in Argentina, then came back to this city by bus',
   },
