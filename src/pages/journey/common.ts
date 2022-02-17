@@ -5,7 +5,7 @@
  * @returns {{x: number; y: number}}
  */
 
-export const getInitializedMousePosByMouseEvent = (
+const getInitializedMousePosByMouseEvent = (
   e: MouseEvent | TouchEvent,
 ): { x: number; y: number } => {
   const element: HTMLDivElement = <HTMLDivElement>e.currentTarget
@@ -43,7 +43,7 @@ export const getInitializedMousePosByMouseEvent = (
  * 引数のelement自体を削除
  * @param {Element} el
  */
-export const removeElementItself = (el: Element): void => {
+const removeElementItself = (el: Element): void => {
   el.parentNode?.removeChild(el)
 }
 
@@ -63,6 +63,8 @@ export const removeElementItself = (el: Element): void => {
  * @param max
  * @returns {number}
  */
-export const getRandomInt = (min: number, max: number): number => {
+const getRandomInt = (min: number, max: number): number => {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
+
+export { getInitializedMousePosByMouseEvent, removeElementItself, getRandomInt }

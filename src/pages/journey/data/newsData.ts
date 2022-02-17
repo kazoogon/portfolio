@@ -4,7 +4,7 @@ export interface newsDataType {
   title: string
   desc: string
 }
-export const newsData: Array<newsDataType> = [
+const newsData: Array<newsDataType> = [
   {
     index: 0,
     country: 'poland',
@@ -36,3 +36,5 @@ export const newsData: Array<newsDataType> = [
     desc: 'When I was in Argentina, I had a airplane ticket from Argentina to Spain. But I realized I could not get on airplane! \n That flight was through two cities in Brazil, it means I needed to enter Brazil once. \n Buuuuuuuut Japanese people need visa to enter Brazil. Later I wrote message to my friend in Argentina, then came back to this city by bus',
   },
 ]
+
+export { newsData }

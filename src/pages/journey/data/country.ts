@@ -4,7 +4,7 @@ export interface CountryInfoType {
   latlng: [number, number]
   desc: string
 }
-export const countryInfos: Array<CountryInfoType> = [
+const countryInfos: Array<CountryInfoType> = [
   {
     index: 0,
     name: 'japan',
@@ -89,6 +89,8 @@ export const countryInfos: Array<CountryInfoType> = [
  * @param {string} name
  * @returns {any}
  */
-export const getCountryInfoByName = (name: string): any => {
+const getCountryInfoByName = (name: string): any => {
   return countryInfos.find((country) => country.name === name)
 }
+
+export { countryInfos, getCountryInfoByName }
