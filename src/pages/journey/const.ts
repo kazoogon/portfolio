@@ -1,11 +1,11 @@
-const PAGE_NAME = {
+export const PAGE_NAME = {
   TOP: 'top',
   ABOUT: 'about',
   JOURNEY: 'journey',
   GALLERY: 'gallery',
 }
 
-const COLOR = {
+export const COLOR = {
   //light
   AMBIENT_LIGHT: 0x28ac9b,
   SPOT_LIGHT: 0xffffff,
@@ -16,7 +16,7 @@ const COLOR = {
   UNIVERSE_POINT: 0xfe700b,
 }
 
-const EVENT = {
+export const EVENT = {
   CLICK: 'click',
   MOUSE_MOVE: 'mousemove',
   MOUSE_LEAVE: 'mouseleave',
@@ -25,12 +25,12 @@ const EVENT = {
 }
 
 // https://easings.net/
-const EASE = {
+export const EASE = {
   OUT_ELASTIC: 'easeOutElastic',
   IN_OUT_CUBIC: 'easeInOutCubic',
 }
 
-const PATH = {
+export const PATH = {
   IMG_TOP: '/top/',
   IMG_ABOUT: '/about/',
   IMG_GALLERY: '/gallery/',
@@ -38,5 +38,3 @@ const PATH = {
   IMG_JOURNEY_COUNTRY: '/journey/country/',
   IMG_JOURNEY_FLAG: '/journey/flag/',
 }
-
-export { PAGE_NAME, COLOR, EVENT, EASE, PATH }
