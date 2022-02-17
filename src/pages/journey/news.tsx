@@ -2,7 +2,7 @@ import { NextPage } from 'next'
 import Image from 'next/image'
 import styled, { css } from 'styled-components'
 import NewsSvg from '../../assets/news.svg'
-import { newsData, newsDataType } from './data/newsData'
+import { newsData, newsDataType } from '../../components/journey/data/newsData'
 import { useContext } from 'react'
 import { selectedNewsContext } from './index'
 

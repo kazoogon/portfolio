@@ -8,9 +8,12 @@ import debounce from 'lodash.debounce'
 //from this app
 import Earth from './object/earth'
 import Stars from './object/stars'
-import { CountryInfoType, getCountryInfoByName } from './data/country'
-import * as CONST from './const'
-import * as Common from './common'
+import {
+  CountryInfoType,
+  getCountryInfoByName,
+} from '../../components/journey/data/country'
+import * as CONST from '../../components/journey/const'
+import * as Common from '../../components/journey/common'
 
 export default class ServiceJourney {
   //three.js parts
