@@ -12,7 +12,11 @@ export const News: NextPage = () => {
     <NewsListWrapper
       key={news.index}
       onClick={() => {
-        setSelectedNews(news.index)
+        setSelectedNews(
+          selectedNews == null || selectedNews !== news.index
+            ? news.index
+            : null,
+        )
       }}
     >
       <NewsTitle>
