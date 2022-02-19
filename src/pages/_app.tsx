@@ -19,7 +19,7 @@ const Application = ({ Component, pageProps }: AppProps) => {
 }
 
 const StyledTitle = styled.div`
-  width: 7rem;
+  width: 6rem;
   position: absolute;
   top: 2rem;
   left: 2rem;
