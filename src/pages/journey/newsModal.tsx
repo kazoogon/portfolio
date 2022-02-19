@@ -107,6 +107,7 @@ const Desc = styled.div`
   font-size: 1.5rem;
   // to recognize new line code in json "¥¥n" in React.js
   white-space: pre-line;
+  user-select: none;
 `
 
 export default NewsModal

@@ -114,6 +114,7 @@ const Sentence = styled.div<{ isSelected: boolean }>`
   color: white;
   font-weight: bold;
   margin-right: 5px;
+  user-select: none;
   ${({ isSelected }) =>
     isSelected &&
     css`
