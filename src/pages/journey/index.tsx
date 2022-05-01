@@ -36,7 +36,7 @@ export const Index: NextPage = () => {
         </NewsWrapper>
         <NewsModal />
         <DarkFullScreen openNewsModal={selectedNews} />
-        <Message>Move cursor on orange mark</Message>
+        <Message>Move cursor on orange mark 👆</Message>
       </Worldmap>
     </selectedNewsContext.Provider>
   )
@@ -210,7 +210,7 @@ const Message = styled.div`
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  opacity: 0.4;
+  opacity: 0.6;
 `
 
 export default Index
