@@ -1,5 +1,4 @@
 # 🌍 My portfolio
-⭐ Star me on GitHub — it motivates us a lot!
 ### My backpacker's history  
 - [kaziu.jp](https://kaziu.jp)  
 - Replace from [this repo](https://github.com/kazoogon/website)
