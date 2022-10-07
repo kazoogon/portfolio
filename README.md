@@ -3,7 +3,6 @@
 </h1>
 <p align="center">~ My backpacker's history ~</p>
 
----
 ## 📋 About
 - [kaziu.jp](https://kaziu.jp)  
 - Replace from [this repo](https://github.com/kazoogon/website)
