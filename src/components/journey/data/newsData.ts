@@ -21,7 +21,7 @@ export const newsData: Array<newsDataType> = [
     index: 2,
     country: 'guatemala',
     title: 'Football master, Kaziu',
-    desc: 'I had no experience of football at all, but I played football with children and adults in Guatemala. \n One day my friend who can speak Spanish well explained me \n\n That child said "this man with glasses (about me) dont know about football at ll, so dont pass the ball to him"\n\n Yeah, man nice to meet you, a fire was lit in me. I started to practice football with my friend who aim to professional football player in Guatemala everyday. \n Two months later, I played with these peoples in midfielder position. \n Now as IT engineer, this football skill is not useful at all  ',
+    desc: 'I had no experience of football at all, but I played football with children and adults in Guatemala. \n One day my friend who can speak Spanish well explained me \n\n That child said "this man with glasses (about me) dont know about football at ll, so dont pass the ball to him"\n\n Yeah, man nice to meet you, a fire was lit in me. I started to practice football with my friend who aim to professional football player in Guatemala everyday. \n Two months later, I played with these people in midfielder position. \n Now as IT engineer, this football skill is not useful at all  ',
   },
   {
     index: 3,
