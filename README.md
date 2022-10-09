@@ -3,7 +3,7 @@
 </h1>
 <p align="center">~ My backpacker's history ~</p>
 
-<p align="center">⭐ Star me on GitHub, if you like it — it motivates me a lot uhehe 😎</p>
+<p align="center">⭐ Star me on GitHub, if you like it — it motivates me a lot 😎</p>
 
 ## 📋 About
 - [kaziu.jp](https://kaziu.jp)  
