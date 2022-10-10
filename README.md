@@ -16,4 +16,15 @@
 - Prettier
 - Eslint
 
-##
+## TODO
+### backpacker's page
+- [ ] hide "news" corner, change to slide component
+- [ ] delete(?) message "move cursor on orange mark", shouldn't put on like this message, but... hmmm I'm thinking looooud ♪
+
+### Poland page
+- [ ] model of each city
+- [ ] change bg image
+- [ ] sparkle effect of dot
+
+### common
+- [ ] warning for user who uses smartphone
