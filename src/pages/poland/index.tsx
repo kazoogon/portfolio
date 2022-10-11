@@ -71,7 +71,7 @@ const MapWrapper = styled.div`
     display: block;
     width: 975px; // TODO: ** wanna use as 100%
     height: 100%;
-    opacity: 0.8;
+    opacity: 0.7;
     scale: 0.8;
 
     .city {
