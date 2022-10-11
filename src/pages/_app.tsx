@@ -24,6 +24,7 @@ const StyledTitle = styled.div`
   top: 2rem;
   left: 2rem;
   z-index: 100;
+  cursor: pointer;
   svg {
     path {
       fill: azure;
