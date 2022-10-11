@@ -7,35 +7,36 @@ import gsap from 'gsap'
 
 export const Index: NextPage = () => {
   useEffect(() => {
+    // ref: https://tympanus.net/codrops/2022/01/19/animate-anything-along-an-svg-path/
     let circles = document.querySelectorAll('circle')
-    function generatePoints() {
-      gsap.set(
-        circles[1],
-        {
-          fill: 'green',
-          cx: 80,
-          cy: 5,
-          scale: 3,
-        },
-      )
-      gsap.to(
-        circles[1],
-        {
-          fill: 'green',
-          cx: 0,
-          cy: 0,
-          duration: 1,
-          scale: 1,
-          // delay: (delay + pointLength) * 0.002,
-          delay: 0.5,
-          ease: 'power2.out',
-        },
-      )
+    const pointLength = Math.random() * length
+
+    function generatePoints(i: number) {
+      const originalColor = circles[i].getAttribute('fill')
+      const point = circles[i].getPointAtLength(pointLength)
+
+      gsap.set(circles[i], {
+        fill: 'green',
+        cx: point.x + (Math.random() - 0.5) * 60,
+        cy: point.y + (Math.random() - 0.5) * 60,
+        scale: Math.floor(Math.random() * 6),
+      })
+
+      gsap.to(circles[i], {
+        // originalColor returns string or null, so need to write like that
+        //  even though there is no "null" in this case
+        fill: originalColor ? originalColor : 'fff',
+        cx: 0,
+        cy: 0,
+        duration: 5,
+        scale: 1,
+        // delay: (delay + pointLength) * 0.002,
+        delay: 1.5,
+        ease: 'power2.out',
+      })
     }
-    window.addEventListener('click', () => {
-      generatePoints()
-    })
-    generatePoints()
+
+    circles.forEach((circle: SVGCircleElement, i: number) => generatePoints(i))
   })
   return (
     <Container>
