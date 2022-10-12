@@ -62,17 +62,16 @@ const Container = styled.div`
 `
 
 const MapWrapper = styled.div`
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   justify-content: center;
 
   svg {
     display: block;
-    width: 975px; // TODO: ** wanna use as 100%
-    height: 100%;
     opacity: 0.7;
     scale: 0.8;
+    overflow: visible;
 
     .city {
       cursor: pointer;
