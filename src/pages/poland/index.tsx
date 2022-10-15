@@ -4,36 +4,62 @@ import PolskaMap from '../../assets/polska_dot_map_1.svg'
 import styled from 'styled-components'
 import { useEffect } from 'react'
 import gsap from 'gsap'
+// @ts-ignore (there is no type file)
+import chroma from 'chroma-js'
+import { POWER2_OUT } from './const'
 
 export const Index: NextPage = () => {
   useEffect(() => {
     // ref: https://tympanus.net/codrops/2022/01/19/animate-anything-along-an-svg-path/
+    const colors = chroma
+      .scale(['#FF7900', '#F94E5D', '#CA4B8C', '#835698', '#445582', '#2F4858'])
+      .colors(12)
+
     let circles = document.querySelectorAll('circle')
-    const pointLength = Math.random() * length
+    const { floor, random } = Math
+    const pointLength = random() * length
 
     function generatePoints(i: number) {
       const originalColor = circles[i].getAttribute('fill')
       const point = circles[i].getPointAtLength(pointLength)
 
-      gsap.set(circles[i], {
-        fill: 'green',
-        cx: point.x + (Math.random() - 0.5) * 60,
-        cy: point.y + (Math.random() - 0.5) * 60,
-        scale: Math.floor(Math.random() * 6),
-      })
+      const tl = gsap.timeline()
 
-      gsap.to(circles[i], {
-        // originalColor returns string or null, so need to write like that
-        //  even though there is no "null" in this case
-        fill: originalColor ? originalColor : 'fff',
-        cx: 0,
-        cy: 0,
-        duration: 5,
-        scale: 1,
-        // delay: (delay + pointLength) * 0.002,
-        delay: 1.5,
-        ease: 'power2.out',
-      })
+      tl.add(
+        gsap.set(circles[i], {
+          fill: colors[floor(random() * colors.length)],
+          cx: point.x + (random() - 0.5) * 300,
+          cy: point.y + (random() - 0.5) * 300,
+          scale: floor(random() * 7),
+        }),
+      )
+        .to(circles[i], {
+          cx: 0,
+          cy: 0,
+          duration: 7,
+          scale: 1,
+          ease: POWER2_OUT,
+        })
+        .to(
+          circles[i],
+          {
+            fill: '#fff',
+            duration: 3,
+            ease: POWER2_OUT,
+          },
+          '-=3',
+        )
+        .to(
+          circles[i],
+          {
+            // originalColor returns string or null, so need to write like that
+            //  even though there is no "null" in this case
+            fill: originalColor ? originalColor : 'fff',
+            duration: 5,
+            ease: POWER2_OUT,
+          },
+          '-=1',
+        )
     }
 
     circles.forEach((circle: SVGCircleElement, i: number) => generatePoints(i))
