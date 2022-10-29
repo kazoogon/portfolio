@@ -177,11 +177,11 @@ const NewsWrapper = styled.div`
   z-index: 2;
   position: absolute;
   right: 0;
-  top: 100px;
+  top: 50%;
+  transform: translateY(-50%);
   margin: 20px;
   padding: 5px;
   max-width: 300px;
-  height: 70%; // to use overflow: scroll:
   @media screen and (max-width: 959px) {
     display: none;
   }
