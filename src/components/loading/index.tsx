@@ -11,7 +11,7 @@ const Loading: React.FC<ILoading> = ({ isLoading }) => {
   useEffect(() => {
     // opacity 0 then after that, need to "visible: hidden" to clickable whole display
     // (I think there is better way though)
-    !isLoading && setTimeout(() => setIsVisible(), 1000)
+    !isLoading && setTimeout(() => setIsVisible(), 2000)
   }, [isLoading])
 
   return (
