@@ -70,20 +70,11 @@ const ModalWrapper = styled.div<{ selectedNews: number | null }>`
   max-height: 500px;
   overflow: scroll;
 
-  // TODO: these code need to move in other share file
   ::-webkit-scrollbar {
-    width: 3px;
+    width: 0;
     height: 0;
   }
 
-  ::-webkit-scrollbar-track {
-    background: #182b34;
-    border-radius: 5px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #1f443b;
-  }
   ${({ selectedNews }) =>
     selectedNews !== null &&
     css`
