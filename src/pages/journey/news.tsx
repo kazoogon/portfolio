@@ -77,18 +77,19 @@ const NewsListsWrapper = styled.div`
   padding-right: 20px;
 
   ::-webkit-scrollbar {
-    width: 3px;
+    width: 0;
     height: 0;
   }
 
-  ::-webkit-scrollbar-track {
-    background: #182b34;
-    border-radius: 5px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #1f443b;
-  }
+  // (↓ maybe it could use someday better way ?)
+  //::-webkit-scrollbar-track {
+  //  background: #182b34;
+  //  border-radius: 5px;
+  //}
+  //
+  //::-webkit-scrollbar-thumb {
+  //  background: #1f443b;
+  //}
 `
 const NewsTitle = styled.div`
   display: flex;
