@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useEffect, useReducer } from 'react'
 import styled, { css, keyframes } from 'styled-components'
 
 interface ILoading {
@@ -6,8 +7,15 @@ interface ILoading {
 }
 
 const Loading: React.FC<ILoading> = ({ isLoading }) => {
+  const [isVisible, setIsVisible] = useReducer((prev) => !prev, true)
+  useEffect(() => {
+    // opacity 0 then after that, need to "visible: hidden" to clickable whole display
+    // (I think there is better way though)
+    !isLoading && setTimeout(() => setIsVisible(), 1000)
+  }, [isLoading])
+
   return (
-    <Wrapper isLoading={isLoading}>
+    <Wrapper isLoading={isLoading} isVisible={isVisible}>
       <Text>
         <Char>K</Char>
         <Char>A</Char>
@@ -19,7 +27,7 @@ const Loading: React.FC<ILoading> = ({ isLoading }) => {
   )
 }
 
-const Wrapper = styled.div<{ isLoading: boolean }>`
+const Wrapper = styled.div<{ isLoading: boolean; isVisible: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
@@ -35,6 +43,14 @@ const Wrapper = styled.div<{ isLoading: boolean }>`
         `
       : css`
           opacity: 0;
+        `}
+  ${({ isVisible }) =>
+    isVisible
+      ? css`
+          visibility: visible;
+        `
+      : css`
+          visibility: hidden;
         `}
 `
 
