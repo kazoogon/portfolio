@@ -1,12 +1,24 @@
-import GlobalStyle from '../styles/globalStyle'
-import { AppProps } from 'next/app'
-import Link from 'next/link'
 import styled from 'styled-components'
+import GlobalStyle from '../styles/globalStyle'
+import Link from 'next/link'
 import TitleSvg from '../assets/kaziu.svg'
+import { useEffect, useReducer } from 'react'
+import { AppProps } from 'next/app'
+import Loading from '~/src/components/loading'
 
-const Application = ({ Component, pageProps }: AppProps) => {
+const Application = ({ pageProps, Component }: AppProps) => {
+  const [isLoading, setIsLoading] = useReducer((prev) => !prev, true)
+  const LOADING_TIME = 3000
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading()
+    }, LOADING_TIME)
+  }, [])
+
   return (
     <>
+      <Loading isLoading={isLoading} />
       <Link href="/">
         <StyledTitle>
           <TitleSvg />
