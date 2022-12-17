@@ -7,10 +7,10 @@ import {
   useRef,
   useState,
 } from 'react'
-import ServiceJourney from '../../components/journey/serviceJourney'
+import ServiceJourney from '~/src/components/journey/serviceJourney'
 import styled, { css } from 'styled-components'
-import News from './news'
-import NewsModal from './newsModal'
+import News from '~/src/pages/journey/news'
+import NewsModal from '~/src/pages/journey/newsModal'
 
 export const selectedNewsContext = createContext(
   {} as {

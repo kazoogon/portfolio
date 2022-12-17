@@ -1,9 +1,9 @@
 import { NextPage } from 'next'
 import styled, { css } from 'styled-components'
-import { newsData } from '../../components/journey/data/newsData'
+import { newsData } from '~/src/components/journey/data/newsData'
 import Image from 'next/image'
 import { useContext } from 'react'
-import { selectedNewsContext } from './index'
+import { selectedNewsContext } from '~/src/pages/journey/index'
 
 export const NewsModal: NextPage = () => {
   const { selectedNews, setSelectedNews } = useContext(selectedNewsContext)

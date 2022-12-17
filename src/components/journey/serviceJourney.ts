@@ -6,11 +6,14 @@ import anime, { AnimeInstance } from 'animejs'
 import debounce from 'lodash.debounce'
 
 //from this app
-import Earth from './object/earth'
-import Stars from './object/stars'
-import { CountryInfoType, getCountryInfoByName } from './data/country'
-import * as CONST from './const'
-import * as Common from './common'
+import Earth from '~/src/components/journey/object/earth'
+import Stars from '~/src/components/journey/object/stars'
+import {
+  CountryInfoType,
+  getCountryInfoByName,
+} from '~/src/components/journey/data/country'
+import * as CONST from '~/src/components/journey/const'
+import * as Common from '~/src/components/journey/common'
 
 export default class ServiceJourney {
   //three.js parts

@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
-import Index from './journey'
-import Github from '../assets/github.svg'
+import Index from '~/src/pages/journey'
+import Github from '@/github.svg'
 import styled from 'styled-components'
 
 const Home: NextPage = () => {

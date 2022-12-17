@@ -1,10 +1,10 @@
 import { NextPage } from 'next'
 import Image from 'next/image'
 import styled, { css } from 'styled-components'
-import NewsSvg from '../../assets/news.svg'
-import { newsData, newsDataType } from '../../components/journey/data/newsData'
+import NewsSvg from '@/news.svg'
+import { newsData, newsDataType } from '~/src/components/journey/data/newsData'
 import { useContext } from 'react'
-import { selectedNewsContext } from './index'
+import { selectedNewsContext } from '~/src/pages/journey/index'
 
 export const News: NextPage = () => {
   const { selectedNews, setSelectedNews } = useContext(selectedNewsContext)
