@@ -36,7 +36,7 @@ export default class Earth extends THREE.Group {
       const point = new THREE.Group()
       point.name = country.name
 
-      this.createPointGround(CONST.COLOR.UNIVERSE_POINT, point)
+      this.createPointGround(point)
       this.setPointPos(point, latitude, longitude)
 
       this.countryPoints.push(point) //マウスとの交差を調べたいものは配列に格納
@@ -46,17 +46,14 @@ export default class Earth extends THREE.Group {
     this.add(this.world)
   }
 
-  private createPointGround(color: number, point: THREE.Group): void {
+  private createPointGround(point: THREE.Group): void {
     const ground = new THREE.Mesh(
-      new THREE.PlaneGeometry(5, 5, 32, 32),
+      new THREE.CircleGeometry(3, 32),
       new THREE.MeshBasicMaterial({
-        color: color,
         map: new THREE.TextureLoader().load(
-          `${CONST.PATH.IMG_JOURNEY}point-ground.png`,
+          `${CONST.PATH.IMG_JOURNEY_FLAG + point.name}.svg`,
         ),
         side: THREE.DoubleSide,
-        transparent: true,
-        blending: THREE.AdditiveBlending,
         name: 'point-ground',
       }),
     )
