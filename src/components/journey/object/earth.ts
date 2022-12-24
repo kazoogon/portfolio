@@ -36,7 +36,7 @@ export default class Earth extends THREE.Group {
       const point = new THREE.Group()
       point.name = country.name
 
-      this.createPointGround(point)
+      this.createFlagOnGround(point)
       this.setPointPos(point, latitude, longitude)
 
       this.countryPoints.push(point) //マウスとの交差を調べたいものは配列に格納
@@ -46,7 +46,7 @@ export default class Earth extends THREE.Group {
     this.add(this.world)
   }
 
-  private createPointGround(point: THREE.Group): void {
+  private createFlagOnGround(point: THREE.Group): void {
     const ground = new THREE.Mesh(
       new THREE.CircleGeometry(3, 32),
       new THREE.MeshBasicMaterial({
