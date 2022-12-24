@@ -55,6 +55,8 @@ export default class Earth extends THREE.Group {
         ),
         side: THREE.DoubleSide,
         name: 'point-ground',
+        transparent: true,
+        opacity: 0.8,
       }),
     )
 
