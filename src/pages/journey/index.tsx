@@ -36,7 +36,6 @@ export const Index: NextPage = () => {
         </NewsWrapper>
         <NewsModal />
         <DarkFullScreen openNewsModal={selectedNews} />
-        <Message>Move cursor on orange mark 👆</Message>
       </Worldmap>
     </selectedNewsContext.Provider>
   )

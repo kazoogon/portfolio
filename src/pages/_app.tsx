@@ -22,6 +22,7 @@ const Application = ({ pageProps, Component }: AppProps) => {
       <Link href="/">
         <StyledTitle>
           <TitleSvg />
+          <SubTitle>My backpacker&apos;s map</SubTitle>
         </StyledTitle>
       </Link>
       <GlobalStyle />
@@ -31,7 +32,7 @@ const Application = ({ pageProps, Component }: AppProps) => {
 }
 
 const StyledTitle = styled.div`
-  width: 6rem;
+  width: 7rem;
   position: fixed;
   top: 2rem;
   left: 2rem;
@@ -42,6 +43,13 @@ const StyledTitle = styled.div`
       fill: azure;
     }
   }
+`
+
+const SubTitle = styled.div`
+  font-size: 0.7rem;
+  font-family: monospace;
+  color: #b0b0b0;
+  white-space: nowrap;
 `
 
 export default Application
