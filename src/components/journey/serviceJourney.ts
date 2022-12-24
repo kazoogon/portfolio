@@ -14,6 +14,7 @@ import {
 } from '~/src/components/journey/data/country'
 import * as CONST from '~/src/components/journey/const'
 import * as Common from '~/src/components/journey/common'
+import { LOADING_TIME } from '~/src/utils/const'
 
 export default class ServiceJourney {
   //three.js parts
@@ -93,6 +94,7 @@ export default class ServiceJourney {
     this.trackControll()
     this.setResizeEvent()
     this.animate()
+    this.firstAnimate()
   }
 
   private createLight(): void {
@@ -196,6 +198,29 @@ export default class ServiceJourney {
     }
   }
 
+  private firstAnimate(): void {
+    this.isMoveEarth = false
+    setTimeout(() => {
+      this.showCountryInfo(
+        'japan',
+        window.innerHeight / 2,
+        window.innerWidth / 2,
+      )
+    }, LOADING_TIME + 500)
+
+    setTimeout(() => {
+      const countryInfo = getCountryInfoByName('japan')
+      this.closePic(countryInfo)
+      this.closeFlag(countryInfo)
+      this.closeName(countryInfo)
+      this.closeDesc(countryInfo)
+    }, LOADING_TIME + 2500)
+
+    setTimeout(() => {
+      this.isMoveEarth = true
+    }, LOADING_TIME + 3000)
+  }
+
   /**
    * get some object which mouse hits by raycaster
    * raycasterを使用し、マウスがぶつかった物体を取得する
@@ -290,8 +315,8 @@ export default class ServiceJourney {
     this.animeShowPic[countryInfo.index] = anime({
       targets: `.${this.PIC_VISIBLE_CLASS}${countryInfo.index}`,
       scale: [0, 1],
-      duration: 900,
-      easing: CONST.EASE.OUT_ELASTIC,
+      duration: 400,
+      easing: CONST.EASE.EASE_SHOW_COUNTRY_INFO,
       begin: () => {
         picImg.addEventListener(CONST.EVENT.MOUSE_LEAVE, () =>
           this.handleMouseLeaveInfo(countryInfo),
@@ -332,8 +357,8 @@ export default class ServiceJourney {
       delay: 100,
       scale: [0, 1],
       rotate: [15, -5],
-      duration: 900,
-      easing: CONST.EASE.OUT_ELASTIC,
+      duration: 400,
+      easing: CONST.EASE.EASE_SHOW_COUNTRY_INFO,
     })
   }
 
@@ -360,8 +385,8 @@ export default class ServiceJourney {
       targets: `.${this.NAME_VISIBLE_CLASS}${countryInfo.index}`,
       delay: 100,
       scale: [0, 1],
-      duration: 900,
-      easing: CONST.EASE.OUT_ELASTIC,
+      duration: 400,
+      easing: CONST.EASE.EASE_SHOW_COUNTRY_INFO,
     })
   }
 
@@ -386,11 +411,11 @@ export default class ServiceJourney {
 
     this.animeShowDesc[countryInfo.index] = anime({
       targets: `.${this.DESC_VISIBLE_CLASS}${countryInfo.index}`,
-      delay: 300,
+      delay: 200,
       scale: [0, 1],
       rotate: [15, -5],
-      duration: 900,
-      easing: CONST.EASE.OUT_ELASTIC,
+      duration: 400,
+      easing: CONST.EASE.EASE_SHOW_COUNTRY_INFO,
     })
   }
 
@@ -418,7 +443,7 @@ export default class ServiceJourney {
       targets: [`.${this.PIC_VISIBLE_CLASS}${countryInfo.index}`],
       scale: [1, 0],
       duration: 500,
-      easing: CONST.EASE.IN_OUT_CUBIC,
+      easing: CONST.EASE.EASE_CLOSE_COUNTRY_INFO,
       // delay: 100,
       // easing: 'spring(1, 80, 10, 0)',
       begin: () => {
@@ -435,7 +460,7 @@ export default class ServiceJourney {
       targets: [`.${this.NAME_VISIBLE_CLASS}${countryInfo.index}`],
       scale: [1, 0],
       duration: 500,
-      easing: CONST.EASE.IN_OUT_CUBIC,
+      easing: CONST.EASE.EASE_CLOSE_COUNTRY_INFO,
       begin: () => {
         this.animeShowName[countryInfo.index].pause()
       },
@@ -450,7 +475,7 @@ export default class ServiceJourney {
       targets: [`.${this.FLAG_VISIBLE_CLASS}${countryInfo.index}`],
       scale: [1, 0],
       duration: 500,
-      easing: CONST.EASE.IN_OUT_CUBIC,
+      easing: CONST.EASE.EASE_CLOSE_COUNTRY_INFO,
       begin: () => {
         this.animeShowFlag[countryInfo.index].pause()
       },
@@ -465,7 +490,7 @@ export default class ServiceJourney {
       targets: [`.${this.DESC_VISIBLE_CLASS}${countryInfo.index}`],
       scale: [1, 0],
       duration: 500,
-      easing: CONST.EASE.IN_OUT_CUBIC,
+      easing: CONST.EASE.EASE_CLOSE_COUNTRY_INFO,
       begin: () => {
         this.animeShowDesc[countryInfo.index].pause()
       },

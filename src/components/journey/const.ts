@@ -26,8 +26,8 @@ export const EVENT = {
 
 // https://easings.net/
 export const EASE = {
-  OUT_ELASTIC: 'easeOutElastic',
-  IN_OUT_CUBIC: 'easeInOutCubic',
+  EASE_SHOW_COUNTRY_INFO: 'easeOutExpo',
+  EASE_CLOSE_COUNTRY_INFO: 'easeInOutCubic',
 }
 
 export const PATH = {

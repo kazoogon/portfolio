@@ -5,10 +5,10 @@ import TitleSvg from '@/kaziu.svg'
 import { useEffect, useReducer } from 'react'
 import { AppProps } from 'next/app'
 import Loading from '~/src/components/loading'
+import { LOADING_TIME } from '~/src/utils/const'
 
 const Application = ({ pageProps, Component }: AppProps) => {
   const [isLoading, setIsLoading] = useReducer((prev) => !prev, true)
-  const LOADING_TIME = 3000
 
   useEffect(() => {
     setTimeout(() => {
